@@ -208,11 +208,9 @@ button {
 .input-field {
   position: relative;
   text-align: left;
-  /*width: 250px;
-  height: 44px;*/
   line-height: 44px;
 }
-label {
+.input-field label {
   position: absolute;
   top: 0;
   left: 0;
@@ -221,27 +219,24 @@ label {
   transition: 0.2s all;
   cursor: text;
 }
-input,
-textarea {
+.input-field input,
+.input-field textarea {
   width: 100%;
   border: 0;
   outline: 0;
-  /* padding: 0.5rem 0;*/
   border-bottom: 2px solid #d3d3d3;
   box-shadow: none;
   color: #111;
 }
-input:invalid {
+.input-field input:invalid {
   outline: 0;
-  /* color: #ff2300;*/
-  /*border-color: #ff2300;*/
 }
-input:focus,
-input:valid {
+.input-field input:focus,
+.input-field input:valid {
   border-color: #605196;
 }
-input:focus ~ label,
-input:valid ~ label {
+.input-field input:focus ~ .input-field label,
+.input-field input:valid ~ .input-field label {
   font-size: 15px;
   top: -24px;
   color: #605196;

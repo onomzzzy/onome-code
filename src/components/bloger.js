@@ -1,11 +1,11 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useRef } from "react";
 import "../App.css";
 import "../components/blog.css";
 import { InputText } from "primereact/inputtext";
 import onome from "../icons/onome.png";
 import login from "../icons/power-button.png";
 import glasses from "../icons/glasses.png";
-import sam from "../icons/sam.jpg";
+import sam from "../icons/mic1.jpg";
 import blogger from "../icons/blogger.png";
 import plus from "../icons/plus.png";
 import writing from "../icons/writing.png";
@@ -17,8 +17,6 @@ import {
   BrowserRouter as Route,
   Link,
   Switch,
-  useParams,
-  useHistory,
   useRouteMatch,
 } from "react-router-dom";
 import ChangePassword from "./changepassword";
@@ -88,6 +86,7 @@ function Blogger() {
   ];
 
   let { path, url } = useRouteMatch();
+  const fileInput = useRef();
   return (
     <div className="body">
       <div className="container">
@@ -117,7 +116,12 @@ function Blogger() {
             <div className="side_nav">
               <div className="card">
                 <div className="profile_img">
-                  <img src={sam} />
+                  <input
+                    ref={fileInput}
+                    style={{ display: "none" }}
+                    type="file"
+                  />
+                  <img src={sam} onClick={() => fileInput.current.click()} />
                 </div>
               </div>
               <div className="push">

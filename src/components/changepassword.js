@@ -8,12 +8,12 @@ function ChangePassword() {
       <div className="container">
         <div className="row">
           <div className="col-12">
-            <div class="jumbotron">
-              <h1 class="display-5">Reset Password!!!</h1>
-              <p class="lead">
+            <div className="jumbotron">
+              <h1 className="display-5">Reset Password!!!</h1>
+              <p className="lead">
                 In order to reset password your old password is required
               </p>
-              <hr class="my-4" />
+              <hr className="my-4" />
               <p>Can't remember Password ? Contact admin</p>
             </div>
           </div>

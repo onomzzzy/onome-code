@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import logo from "../icons/logo.png"; // Tell webpack this JS file uses this image
 import lockicon from "../icons/unlock.png"; // Tell webpack this JS file uses this image
-import "../components/login.css";
 import { Link } from "react-router-dom";
+import "../components/login.css";
+import axios from "axios";
 import Messages from "../components/messages";
-import auth from "../components/auth";
+import { UserContext } from "../App";
+
+const uri = "http://localhost:4000/api/login";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -13,12 +16,38 @@ function Login() {
   const [message, setMessage] = useState("");
   const [msgCode, setMsgCode] = useState(0);
 
+  const userContext = useContext(UserContext);
+
   function handleUsernameChange(e) {
     setUsername(e.target.value);
   }
 
   function handlePasswordChange(e) {
     setPassword(e.target.value);
+  }
+
+  function contantServer() {
+    axios
+      .get(uri, {
+        username: username,
+        password: password,
+      })
+      .then((res) => {
+        let token = res.data;
+        if (token == null || token === "") {
+          setMsgCode(4);
+          setMessage("Invalid Credentials");
+        } else {
+          localStorage.setItem("onomeToken", token);
+          userContext.userDispatch({ type: "LOGGED_IN", username: username });
+          setMsgCode(1);
+          setMessage("Login Successfull");
+        }
+      })
+      .catch((err) => {
+        setMsgCode(4);
+        setMessage("Invalid Credentials");
+      });
   }
 
   function handleUserValidation(e) {
@@ -108,7 +137,11 @@ function Login() {
                 </div>
               </div>
               <div className="ui-g-12">
-                <button type="button" className="btn btn-sm">
+                <button
+                  type="button"
+                  onClick={contantServer}
+                  className="btn btn-sm"
+                >
                   Login <img src={lockicon}></img>
                 </button>
               </div>
